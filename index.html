@@ -3,59 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lluvia de Flores Amarillas</title>
+    <title>Flores Amarillas Cayendo</title>
     <style>
         body {
-            margin: 0;
+            background-color: #87CEEB;
             overflow: hidden;
-            background-image: url('main/flor.png'); /* Busca la imagen en la carpeta "main" */
-            background-size: cover;
-            background-repeat: no-repeat;
+            margin: 0;
+            position: relative;
         }
-        .flower {
+
+        .flor {
             position: absolute;
-            width: 50px;
-            height: 50px;
-            background-image: url('main/flor.png'); /* Imagen de flor cayendo */
-            background-size: contain;
-            background-repeat: no-repeat;
+            width: 40px;
+            height: 40px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Simple_yellow_flower.svg/120px-Simple_yellow_flower.svg.png');
+            background-size: cover;
+            animation: caer 5s linear infinite;
+        }
+
+        @keyframes caer {
+            from {
+                transform: translateY(-100px);
+            }
+            to {
+                transform: translateY(100vh);
+            }
         }
     </style>
 </head>
 <body>
+    <script>
+        function crearFlor() {
+            let flor = document.createElement('div');
+            flor.classList.add('flor');
+            flor.style.left = Math.random() * window.innerWidth + 'px';
+            flor.style.animationDuration = (3 + Math.random() * 2) + 's';
+            document.body.appendChild(flor);
 
-<script>
-    function createFlower() {
-        const flower = document.createElement("div");
-        flower.classList.add("flower");
-        document.body.appendChild(flower);
+            setTimeout(() => {
+                flor.remove();
+            }, 5000);
+        }
 
-        // Posición inicial aleatoria en la parte superior
-        flower.style.left = Math.random() * window.innerWidth + "px";
-        flower.style.top = "-50px";
-
-        // Animación de caída
-        let speed = Math.random() * 3 + 2; // Velocidad aleatoria
-        let position = 0;
-        let rotation = Math.random() * 360; // Rotación aleatoria
-        let interval = setInterval(() => {
-            position += speed;
-            rotation += 2;
-            flower.style.top = position + "px";
-            flower.style.transform = `rotate(${rotation}deg)`;
-            
-            if (position > window.innerHeight) {
-                clearInterval(interval);
-                flower.remove(); // Elimina la flor al salir de la pantalla
-            }
-        }, 20);
-    }
-
-    // Generar flores continuamente
-    window.onload = function() {
-        setInterval(createFlower, 300);
-    };
-</script>
-
+        setInterval(crearFlor, 500);
+    </script>
 </body>
 </html>
