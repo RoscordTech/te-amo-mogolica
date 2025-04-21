@@ -8,14 +8,15 @@
         body {
             margin: 0;
             overflow: hidden;
-            background-image: url('flor.png'); /* Fondo de flores */
+            background-image: url('main/flor.png'); /* Busca la imagen en la carpeta "main" */
             background-size: cover;
+            background-repeat: no-repeat;
         }
         .flower {
             position: absolute;
             width: 50px;
             height: 50px;
-            background-image: url('flor.png'); /* Imagen de flor cayendo */
+            background-image: url('main/flor.png'); /* Imagen de flor cayendo */
             background-size: contain;
             background-repeat: no-repeat;
         }
@@ -34,7 +35,7 @@
         flower.style.top = "-50px";
 
         // Animación de caída
-        let speed = Math.random() * 3 + 2; // Velocidad de caída aleatoria
+        let speed = Math.random() * 3 + 2; // Velocidad aleatoria
         let position = 0;
         let rotation = Math.random() * 360; // Rotación aleatoria
         let interval = setInterval(() => {
@@ -51,7 +52,9 @@
     }
 
     // Generar flores continuamente
-    setInterval(createFlower, 300);
+    window.onload = function() {
+        setInterval(createFlower, 300);
+    };
 </script>
 
 </body>
